@@ -1,4 +1,5 @@
 var buttonColours = ["red", "blue", "green", "yellow"];
+
 var gamePattern = [];
 var userClickedPattern = []; 
 
@@ -8,7 +9,9 @@ $(".btn").click(function() {
      var userChosenColour = $(this).attr("id");
      userClickedPattern.push(userChosenColour); 
      //console.log(userClickedPattern);
-     playSound(userChosenColour); //when a user clicks on a button, the corresponding sound should be played.
+     playSound(userChosenColour);
+     //when a user clicks on a button, the corresponding sound should be played.
+     animatePress(userChosenColour);
 });
 
 function nextSequence() {
@@ -18,8 +21,7 @@ function nextSequence() {
     gamePattern.push(randomChosenColour);
   
     $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
-  
-    //4. Refactor the code in playSound() so that it will work for both playing sound in nextSequence() and when the user clicks a button.
+
     playSound(randomChosenColour);
   }
 
@@ -28,3 +30,10 @@ function playSound(name) {
     audio.play();
 }
 
+function animatePress(currentColour) {
+    $("#" + currentColour).addClass("pressed"); //jQuery adding this 'pressed' class in the styles.css to the button gets clicked.
+
+    setTimeout(function() {
+        $("#" + currentColour).removeClass("pressed");
+    }, 100); //after 0.1sec, remove the pressed class 
+};
