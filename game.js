@@ -23,7 +23,29 @@ $(".btn").click(function() {
 
      playSound(userChosenColour);
      animatePress(userChosenColour);
+    
+     //2. Call checkAnswer() after a user has clicked and chosen answer, 
+     //passing in the index of the last answer in the user's sequence
+     //ex) if the user has pressed [red, greedn red, yellow] the index of last answer is '3'.
+     checkAnswer(userClickedPattern.length-1);
 });
+
+
+//1.Create function, it should take one input w/ the name currentLevel
+function checkAnswer(currentLevel) {
+    //3. Write if statement to check if the most recent user answer is the same as the game pattern.
+    //if so then log "success", otherwise log "wrong"
+    if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
+        console.log("success");
+    } else {
+        console.log("wrong");
+    }
+
+}
+
+//Why console.log???
+//You can now use these log statements along with logging the values of userClickedPattern and gamePattern in the Chrome Developer Tools console to check whether if your code is performing as you would expect and debug your code as needed. 
+//Once you're done, feel free to remove these log statements.
 
 function nextSequence() {
 
