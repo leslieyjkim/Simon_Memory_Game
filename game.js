@@ -37,20 +37,27 @@ function checkAnswer(currentLevel) {
     //if so then log "success", otherwise log "wrong"
     if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
         console.log("success");
+        //4. check that they have finished their sequence with another if statement.
+        if (userClickedPattern.length === gamePattern.length) {
+            //5. call nextSequence() after a 0.1 sec delay.
+            setTimeout(function() {
+                nextSequence();
+            }, 1000);
+        } 
     } else {
         console.log("wrong");
     }
 
 }
 
-//Why console.log???
-//You can now use these log statements along with logging the values of userClickedPattern and gamePattern in the Chrome Developer Tools console to check whether if your code is performing as you would expect and debug your code as needed. 
-//Once you're done, feel free to remove these log statements.
 
 function nextSequence() {
 
+    //6. Once nextSequence() is triggered, reset the 'userClickedPattern' to an empty ready for the enxt level.
+    userClickedPattern = [];
+
     level++;  //inside nextSequence(), increase the level by 1 every time nextSequence() is called.
-    $("level-title").text("Level " + level); //inside nextSequence(), update the <h1> with this change in the value of level.
+    $("#level-title").text("Level " + level); //inside nextSequence(), update the <h1> with this change in the value of level.
 
     var randomNumber = Math.floor(Math.random() * 4);
     var randomChosenColour = buttonColours[randomNumber];
