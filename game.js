@@ -23,29 +23,33 @@ $(".btn").click(function() {
 
      playSound(userChosenColour);
      animatePress(userChosenColour);
-    
-     //2. Call checkAnswer() after a user has clicked and chosen answer, 
-     //passing in the index of the last answer in the user's sequence
-     //ex) if the user has pressed [red, greedn red, yellow] the index of last answer is '3'.
+
      checkAnswer(userClickedPattern.length-1);
 });
 
 
-//1.Create function, it should take one input w/ the name currentLevel
+
 function checkAnswer(currentLevel) {
-    //3. Write if statement to check if the most recent user answer is the same as the game pattern.
-    //if so then log "success", otherwise log "wrong"
     if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
         console.log("success");
-        //4. check that they have finished their sequence with another if statement.
         if (userClickedPattern.length === gamePattern.length) {
-            //5. call nextSequence() after a 0.1 sec delay.
             setTimeout(function() {
                 nextSequence();
             }, 1000);
         } 
     } else {
         console.log("wrong");
+        //1. play sound 'wrong.mp3' if the user got one of the answers wrong.
+        playSound("wrong");
+
+        //2. styles.css, there is a class "game-over", apply this to the body when the user gets wrong, and then remove it after 200 miliseconds
+        $("body").addClass("game-over");
+        setTimeout(function() {
+            $("body").removeClass("game-over");
+        }, 200);
+
+        //3. Change <h1> title to "Game Over, Press Any Key to Restart" if the user got wrong answer.
+        $("#level-title").text("Game Over, Press Any Key to Restart");
     }
 
 }
